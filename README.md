@@ -24,7 +24,7 @@ Ideal for developers, IAM architects, Web3 builders, researchers, and digital id
 ### Resources on ZKP
 - [ZKProof.org](https://zkproof.org/)
 - [Vitalik Buterin: An Introduction to ZKPs](https://vitalik.ca/general/2022/06/15/using_snarks.html)
-- [ZKPs in Hyperledger Aries](https://www.hyperledger.org/blog/2021/02/04/zero-knowledge-proofs-in-hyperledger-aries)
+- [ZKPs in Hyperledger Aries](https://www.lfdecentralizedtrust.org/blog/2019/04/25/research-paper-validating-confidential-blockchain-transactions-with-zero-knowledge-proof)
 - [Zokrates (zkSNARKs for Ethereum)](https://zokrates.github.io/introduction.html)
 
 ---
@@ -34,12 +34,10 @@ Ideal for developers, IAM architects, Web3 builders, researchers, and digital id
 ### Core Standards & Intro Guides
 - [W3C - Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/)
 - [W3C - Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
-- [SSI Book (by Sovrin Foundation)](https://book.self-sovereign.org/)
-- [The Path to Self-Sovereign Identity (Christopher Allen)](https://sovrin.org/wp-content/uploads/2017/06/ThePathToSelfSovereignIdentity.pdf)
 
 ### Articles & Talks
 - [TED Talk - Toufic El-Rjula: The Invisible Man](https://www.ted.com/talks/tey_el_rjula_how_one_pizza_order_changed_my_life)
-- [Why Self-Sovereign Identity Matters (Coindesk)](https://www.coindesk.com/markets/2016/05/27/the-path-to-self-sovereign-identity/)
+- [Why Self-Sovereign Identity Matters (Coindesk)](https://www.coindesk.com/pt-br/markets/2016/04/27/the-path-to-self-sovereign-identity)
 - [Hype Cycle™ for Digital Identity, 2023](https://wwps.microsoft.com/blog/digital-identity-gartner)
 
 ### Microsoft Identity Principles
