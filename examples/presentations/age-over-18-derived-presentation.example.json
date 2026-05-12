@@ -1,0 +1,36 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://www.w3.org/ns/credentials/examples/v2"
+  ],
+  "id": "urn:uuid:00000000-0000-4000-8000-000000000301",
+  "type": [
+    "VerifiablePresentation",
+    "ExampleSelectiveDisclosurePresentation"
+  ],
+  "holder": "did:key:z6MkExampleHolderKey",
+  "verifiableCredential": [
+    {
+      "@context": [
+        "https://www.w3.org/ns/credentials/v2",
+        "https://www.w3.org/ns/credentials/examples/v2"
+      ],
+      "type": [
+        "VerifiableCredential",
+        "ExampleAgeOverCredential"
+      ],
+      "issuer": "did:web:issuer.example",
+      "validFrom": "2026-01-01T00:00:00Z",
+      "credentialSubject": {
+        "ageOver18": true
+      },
+      "proof": {
+        "type": "DataIntegrityProof",
+        "cryptosuite": "bbs-2023",
+        "proofPurpose": "assertionMethod",
+        "verificationMethod": "did:web:issuer.example#bbs-key-1",
+        "proofValue": "PLACEHOLDER_NOT_A_REAL_PROOF"
+      }
+    }
+  ]
+}

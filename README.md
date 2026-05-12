@@ -1,102 +1,113 @@
-# Decentralized Identity (DID) & Self-Sovereign Identity (SSI) / ZKP
+# DID, SSI e ZKP
 
-This repository gathers **resources, tools, papers, and project links** related to the development, implementation, and exploration of **Decentralized Identifiers (DIDs)** and **Self-Sovereign Identity (SSI)**.
+Laboratorio de referencia para identidade descentralizada, credenciais verificaveis e provas de conhecimento zero, com foco em interoperabilidade, privacidade e aplicabilidade ao contexto brasileiro.
 
-Ideal for developers, IAM architects, Web3 builders, researchers, and digital identity enthusiasts.
+Este repositorio organiza pesquisa, arquitetura, fontes primarias, exemplos e um roadmap de evolucao para projetos envolvendo:
 
----
+- DIDs, ou identificadores descentralizados.
+- SSI, ou identidade autossoberana.
+- VCs, ou credenciais verificaveis.
+- VPs, ou apresentacoes verificaveis.
+- ZKPs, disclosure seletivo e provas derivadas.
 
-## What Are DID and SSI?
+## Proposta
 
-- **DID (Decentralized Identifier):** A globally unique identifier that enables verifiable, self-controlled digital identities without relying on centralized authorities.
-- **SSI (Self-Sovereign Identity):** A model in which individuals own, control, and share their digital credentials with full autonomy.
+O objetivo e sair de uma lista de links e construir uma base tecnica reutilizavel para PoCs, estudos e implementacoes de identidade digital centrada no usuario.
 
----
-## What Is ZKP (Zero-Knowledge Proof)?
+A tese central do projeto e que credenciais digitais podem ser emitidas por autoridades confiaveis, armazenadas em carteiras sob controle do titular e apresentadas a verificadores com divulgacao minima de dados. Essa tese se apoia no modelo emissor, titular e verificador definido pelo W3C Verifiable Credentials Data Model v2.0 e nos fluxos de emissao e apresentacao definidos pela OpenID Foundation em OpenID4VCI e OpenID4VP.
 
-**Zero-Knowledge Proofs (ZKPs)** are cryptographic methods that allow one party (the prover) to prove to another (the verifier) that they know a value or fulfill a condition **without revealing any of the underlying data**.
+Fontes base: [W3C VC Data Model v2.0](https://www.w3.org/TR/vc-data-model-2.0/), [OpenID4VCI 1.0](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0-final.html), [OpenID4VP 1.0](https://openid.net/specs/openid-4-verifiable-presentations-1_0-final.html).
 
-**Use cases in identity:**
-- Prove you're over 18 without revealing your birthdate.
-- Prove you have a valid diploma without exposing the full certificate.
-- Enhance privacy and trust in verifiable credentials.
+## Principio de fontes
 
-### Resources on ZKP
-- [ZKProof.org](https://zkproof.org/)
-- [Vitalik Buterin: An Introduction to ZKPs](https://vitalik.ca/general/2022/06/15/using_snarks.html)
-- [ZKPs in Hyperledger Aries](https://www.lfdecentralizedtrust.org/blog/2019/04/25/research-paper-validating-confidential-blockchain-transactions-with-zero-knowledge-proof)
-- [Zokrates (zkSNARKs for Ethereum)](https://zokrates.github.io/introduction.html)
+Toda afirmacao factual relevante deve apontar para uma fonte primaria ou oficial. Quando uma afirmacao for hipotese, inferencia ou recomendacao de arquitetura, ela deve ser marcada como tal.
 
----
+Veja a matriz de origem em [docs/sources.md](docs/sources.md).
 
-## Recommended Reading & Concepts
+## Mapa do repositorio
 
-### Core Standards & Intro Guides
-- [W3C - Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/)
-- [W3C - Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
+- [docs/architecture.md](docs/architecture.md): arquitetura de referencia, atores, fluxos e decisoes.
+- [docs/standards.md](docs/standards.md): padroes e protocolos recomendados.
+- [docs/brazil.md](docs/brazil.md): contexto brasileiro, CIN, GOV.BR, ICP-Brasil e LGPD.
+- [docs/use-cases.md](docs/use-cases.md): casos de uso priorizados.
+- [docs/roadmap.md](docs/roadmap.md): fases de expansao do projeto.
+- [docs/sources.md](docs/sources.md): fontes oficiais, primarias e escopo de uso.
+- [examples](examples): exemplos sinteticos de credenciais e apresentacoes.
 
-### Articles & Talks
-- [TED Talk - Toufic El-Rjula: The Invisible Man](https://www.ted.com/talks/tey_el_rjula_how_one_pizza_order_changed_my_life)
-- [Why Self-Sovereign Identity Matters (Coindesk)](https://www.coindesk.com/pt-br/markets/2016/04/27/the-path-to-self-sovereign-identity)
-- [Hype Cycle™ for Digital Identity, 2023](https://wwps.microsoft.com/blog/digital-identity-gartner)
+## Arquitetura de referencia
 
-### Microsoft Identity Principles
-- [Microsoft Identity Principles](http://aka.ms/identityprinciples)  
-- [Decentralized Identity: The Direct Presentation Model](https://techcommunity.microsoft.com/t5/identity-standards-blog/decentralized-identity-the-direct-presentation-model/ba-p/3071981)  
-- [Decentralized Identity: The Basics of Decentralized Identity](https://techcommunity.microsoft.com/t5/identity-standards-blog/decentralized-identity-the-basics-of-decentralized-identity/ba-p/3071980)  
-- [Verifiable Credentials Deep Dive – Microsoft Security Blog](https://techcommunity.microsoft.com/blog/microsoft-security-blog/decentralized-identity-verifiable-credentials-deep-dive/3690641)
+```mermaid
+flowchart LR
+  Issuer["Emissor"] -->|"emite credencial"| Wallet["Titular / Wallet"]
+  Wallet -->|"apresenta prova"| Verifier["Verificador"]
+  Verifier -->|"resolve identificadores"| DID["DID Resolver"]
+  Verifier -->|"consulta status"| Status["Status / Revogacao"]
+  Verifier -->|"avalia confianca"| Trust["Registro de confianca"]
+  Issuer -->|"publica schemas"| Schema["Registro de schemas"]
+```
 
----
+Resumo dos papeis:
 
-## Frameworks & Tools
+- Emissor: entidade que assina declaracoes sobre um sujeito.
+- Titular ou holder: pessoa, organizacao ou agente que recebe e controla a credencial.
+- Wallet: software que guarda credenciais e cria apresentacoes.
+- Verificador: entidade que solicita e valida provas.
+- Registro de confianca: camada que ajuda o verificador a decidir quais emissores aceitar.
 
-### Hyperledger Projects
-- [Indy](https://www.hyperledger.org/use/hyperledger-indy) – Ledger for DIDs and identity schemas
-- [Aries](https://www.hyperledger.org/use/hyperledger-aries) – Peer-to-peer communication and credential exchange
-- [Ursa](https://www.hyperledger.org/use/hyperledger-ursa) – Cryptographic libraries
+Fontes: [W3C DID Core](https://www.w3.org/TR/did-core/), [W3C VC Data Model v2.0](https://www.w3.org/TR/vc-data-model-2.0/), [OpenID4VP 1.0](https://openid.net/specs/openid-4-verifiable-presentations-1_0-final.html).
 
-### SSI Platforms
-- [Trinsic](https://www.trinsic.id/)
-- [Dock.io](https://www.dock.io/)
-- [Bloom Protocol](https://bloom.co/)
+## Direcao tecnica sugerida
 
----
+Para uma primeira PoC:
 
-## Ecosystem & Standards
-- [Decentralized Identity Foundation (DIF)](https://identity.foundation/)
-- [Trust over IP Foundation (ToIP)](https://trustoverip.org/)
-- [Microsoft Entra Verified ID](https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/)
-- [Sovrin Foundation](https://sovrin.org/)
+- Usar `did:web` para emissores institucionais, por ser simples de publicar em dominio HTTPS.
+- Usar `did:key` ou identificadores efemeros para exemplos de titulares, evitando correlacao desnecessaria.
+- Modelar credenciais no W3C VC Data Model v2.0.
+- Usar OpenID4VCI para emissao e OpenID4VP para apresentacao.
+- Comecar com assinatura verificavel simples e evoluir para disclosure seletivo ou BBS/ZKP quando houver necessidade real de privacidade.
 
----
+`did:web` e `did:key` sao recomendacoes pragmaticas para PoC, nao uma decisao definitiva de producao. Fontes: [did:web Method Specification](https://w3c-ccg.github.io/did-method-web/), [did:key DID Method Specification](https://w3c-ccg.github.io/did-key-spec/), [W3C DID Methods Registry](https://w3c.github.io/did-extensions/methods/).
 
-## National Proposals / Experiments (Brazil)
+## Contexto brasileiro
 
-- **bCPF / bCNPJ:** Initiatives under discussion and prototyping using blockchain to anchor Brazilian national identifiers (CPF/CNPJ) as DIDs, especially explored by Serpro and government agencies in contexts of interoperability and credential verification.
-- **CPQD (Brazil):** Developing identity-focused frameworks and research in SSI/DID.
+A Carteira de Identidade Nacional usa o CPF como numero unico, possui formato fisico e digital e inclui QR Code para verificacao. O GOV.BR tambem possui niveis de conta bronze, prata e ouro, com diferentes mecanismos de validacao. A ICP-Brasil fornece certificados digitais para identificacao segura e assinaturas eletronicas qualificadas.
 
----
+Esses elementos nao devem ser confundidos automaticamente com SSI ou DID. Eles formam o contexto institucional brasileiro que uma proposta de credenciais verificaveis precisa respeitar.
 
-## Use Cases
-- Employee onboarding with verified credentials
-- Academic diplomas and certifications
-- COVID-19 vaccination credentials
-- Digital identity for stateless populations/refugees
-- Passwordless login and verifiable proof of attributes
+Fontes: [CIN - Governo Digital](https://www.gov.br/governodigital/pt-br/identidade/identificacao-do-cidadao-e-carteira-de-identidade-nacional/carteira-de-identidade-nacional-cin), [Niveis da conta GOV.BR](https://www.gov.br/governodigital/pt-br/identidade/conta-gov-br/niveis-da-conta-govbr), [Certificacao Digital - ITI](https://www.gov.br/iti/pt-br/acesso-a-informacao/perguntas-frequentes/certificacao-digital), [LGPD](https://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2018/Lei/L13709compilado.htm).
 
----
+## Casos de uso iniciais
 
-## Contributing
-Have an article, link, or tool worth sharing? 
-Feel free to open a **Pull Request** or **Issue** to contribute! 💬
+- Prova de maioridade sem revelar data de nascimento.
+- Diploma verificavel com apresentacao seletiva do curso e instituicao.
+- Onboarding de colaboradores com verificacao de vinculo profissional.
+- Credencial organizacional para representantes de empresas.
+- Provas de atributos para acesso a servicos publicos ou privados com minimizacao de dados.
 
-Let’s build a more private, secure, and user-controlled identity future — together.
+Detalhes em [docs/use-cases.md](docs/use-cases.md).
 
----
+## Roadmap resumido
 
-> "Identity is digital existence. Decentralizing it gives sovereignty to those who matter most: the users."
+1. Organizar a base documental e a politica de fontes.
+2. Criar exemplos de credenciais e apresentacoes sinteticas.
+3. Implementar uma PoC de emissao e verificacao.
+4. Adicionar status/revogacao e validacao de schema.
+5. Evoluir para disclosure seletivo e provas derivadas.
+6. Mapear aderencia juridica, operacional e de governanca no Brasil.
 
----
+Detalhes em [docs/roadmap.md](docs/roadmap.md).
 
-**Provided by:** [Diego Shimohama / Naapi]  
-**License:** MIT
+## Contribuindo
+
+Contribuicoes sao bem-vindas, desde que sigam a regra de rastreabilidade:
+
+- Use fontes oficiais ou primarias sempre que possivel.
+- Marque claramente exemplos sinteticos.
+- Separe fato, interpretacao e proposta.
+- Evite inserir identificadores pessoais reais em exemplos.
+
+Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licenca
+
+MIT. Veja [LICENSE](LICENSE).
