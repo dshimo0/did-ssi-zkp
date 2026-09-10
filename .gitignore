@@ -1,0 +1,15 @@
+# segredos e ambiente
+.env
+.env.*
+!.env.example
+
+# dependencias
+node_modules/
+
+# python
+__pycache__/
+*.pyc
+
+# sistema operacional
+.DS_Store
+Thumbs.db
